@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ company.company }} — FMD</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fmd_latest.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/landing"><span class="brand-mark">FMD</span><span><b>Financial Multiples Database</b><small>Карточка компании</small></span></a>
+  <div class="company-header-actions">
+    <a class="ghost-btn button-link" href="/landing">← К выборке</a>
+    <div class="dropdown-wrap">
+      <button class="primary-btn" id="exportBtn">↓ Выгрузить</button>
+      <div class="dropdown-panel export-panel" id="exportMenu" hidden>
+        <button data-export="financials"><b>Финансовые показатели</b><span>Excel по компании</span></button>
+        <button data-export="quotes"><b>Котировки</b><span>История цен</span></button>
+        <button data-export="reports"><b>Отчётность и скриншоты</b><span>Исходные документы</span></button>
+        <button data-export="full"><b>Все доступные данные</b><span>Полный комплект по компании</span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="page-shell company-page" data-slug="{{ slug }}">
+  <div class="breadcrumb"><a href="/landing">Компании</a><span>/</span><span>{{ company.company }}</span></div>
+  <section class="company-title-row">
+    <div class="company-title"><div class="logo-circle">{{ company.company[0] }}</div><div><h1>{{ company.company }}</h1><p>{{ company.ticker }} · {{ company.sector }}</p></div></div>
+    <div class="headline-metrics" id="headlineMetrics"></div>
+  </section>
+  <nav class="tabs" id="companyTabs">
+    <button class="active" data-tab="financials">Финансовые показатели</button>
+    <button data-tab="sources">Источники</button>
+    <button data-tab="quotes">Котировки</button>
+  </nav>
+
+  <section class="tab-panel active" data-panel="financials">
+    <div class="card-grid financial-layout">
+      <div class="financial-card card-main">
+        <div class="card-heading"><div><h2>Финансовые показатели</h2><p>Нажмите на значение — справа откроется скриншот для выбранного года</p></div><span class="year-hint"><b>2024</b> ↔ <b>2025</b> — разные ячейки, один клик</span></div>
+        <div class="financial-table-wrap"><table class="financial-table" id="financialTable"></table></div>
+      </div>
+      <aside class="source-preview" id="sourcePreview">
+        <div class="source-preview-empty"><span>▤</span><h3>Источник показателя</h3><p>Нажмите на любое доступное значение за 2024 или 2025 год.</p></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="tab-panel" data-panel="sources">
+    <div class="sources-page">
+      <div><h2>Источники и скриншоты</h2><p>Первичные документы и подтверждающие изображения по показателям компании.</p></div>
+      <div id="sourceCards" class="source-cards"></div>
+    </div>
+  </section>
+
+  <section class="tab-panel" data-panel="quotes">
+    <div class="quotes-card">
+      <div class="quotes-head"><div><h2>Котировки</h2><p id="quoteSubtitle">Сохранённая история цен</p></div><div class="quote-periods"><button data-days="10">10 дней</button><button class="active" data-days="30">30 дней</button></div></div>
+      <div id="quoteStats" class="quote-stats"></div>
+      <div id="quoteChart" class="quote-chart"></div>
+      <p class="chart-note">График находится внутри карточки компании; отдельная таблица цен не используется.</p>
+    </div>
+  </section>
+</main>
+<div class="toast" id="toast" hidden></div>
+<script src="{{ url_for('static', filename='js/company_latest.js') }}"></script>
+</body>
+</html>

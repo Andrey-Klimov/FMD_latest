@@ -1,0 +1,37 @@
+[
+  {
+    "company": "ЛУКОЙЛ",
+    "company_id": null,
+    "status": "error",
+    "error": "ID компании не найден",
+    "docs": {}
+  },
+  {
+    "company": "ГАЗПРОМ",
+    "company_id": null,
+    "status": "error",
+    "error": "ID компании не найден",
+    "docs": {}
+  },
+  {
+    "company": "ЯНДЕКС",
+    "company_id": null,
+    "status": "error",
+    "error": "ID компании не найден",
+    "docs": {}
+  },
+  {
+    "company": "Т-Технологии",
+    "company_id": null,
+    "status": "error",
+    "error": "ID компании не найден",
+    "docs": {}
+  },
+  {
+    "company": "Татнефть",
+    "company_id": null,
+    "status": "error",
+    "error": "ID компании не найден",
+    "docs": {}
+  }
+]

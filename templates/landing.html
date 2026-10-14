@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FMD — Financial Multiples Database</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/fmd_latest.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/landing"><span class="brand-mark">FMD</span><span><b>Financial Multiples Database</b><small>Финансовые показатели и мультипликаторы российских публичных компаний</small></span></a>
+  <a class="method-link" href="#methodology" id="methodologyLink">Методология</a>
+</header>
+<main class="page-shell">
+  <section class="search-zone">
+    <h1>Компании</h1>
+    <p class="section-subtitle">Сформируйте выборку по названию, тикеру, отрасли или финансовым параметрам</p>
+    <div class="smart-search-wrap">
+      <div class="smart-search">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" autocomplete="off" placeholder="Компания, тикер или отрасль">
+        <button class="text-btn" id="clearSearch" hidden>Очистить</button>
+      </div>
+      <div id="suggestions" class="suggestions" hidden></div>
+    </div>
+  </section>
+
+  <section class="filters-zone" aria-label="Фильтры">
+    <div class="filter-item sector-filter">
+      <label>Отрасль</label>
+      <select id="sectorFilter"><option value="">Все отрасли</option></select>
+    </div>
+    <div class="filter-item range-filter">
+      <label>Выручка, млрд <span id="revenueCurrency">RUB</span></label>
+      <div class="range-inputs"><input id="revenueMin" type="number" step="0.1" placeholder="от"><span>—</span><input id="revenueMax" type="number" step="0.1" placeholder="до"></div>
+    </div>
+    <div class="filter-item range-filter">
+      <label>EBITDA, млрд <span id="ebitdaCurrency">RUB</span></label>
+      <div class="range-inputs"><input id="ebitdaMin" type="number" step="0.1" placeholder="от"><span>—</span><input id="ebitdaMax" type="number" step="0.1" placeholder="до"></div>
+    </div>
+    <div class="filter-item compact-filter">
+      <label>Валюта</label>
+      <select id="currencyFilter"><option value="RUB">RUB</option><option value="USD">USD</option><option value="">Все</option></select>
+    </div>
+    <button class="ghost-btn reset-btn" id="resetFilters">Сбросить</button>
+  </section>
+
+  <section class="results-zone">
+    <div class="results-head">
+      <div><h2>Список компаний</h2><p id="resultCount">—</p></div>
+      <div class="results-actions">
+        <div class="dropdown-wrap">
+          <button class="ghost-btn" id="columnsBtn">☷ Столбцы</button>
+          <div class="dropdown-panel columns-panel" id="columnsMenu" hidden>
+            <div class="menu-title">Показывать в таблице</div>
+            <div id="columnOptions"></div>
+            <div class="menu-note">Компания и тикер отображаются всегда.</div>
+          </div>
+        </div>
+        <div class="dropdown-wrap">
+          <button class="primary-btn" id="exportBtn">↓ Выгрузить</button>
+          <div class="dropdown-panel export-panel" id="exportMenu" hidden>
+            <button data-export="financials"><b>Финансовые показатели</b><span>Excel по текущей выборке</span></button>
+            <button data-export="quotes"><b>Котировки</b><span>История цен по компаниям</span></button>
+            <button data-export="reports"><b>Отчётность и скриншоты</b><span>Исходные документы выбранных компаний</span></button>
+            <button data-export="full"><b>Все доступные данные</b><span>Финансы + котировки + отчётность</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="company-list-wrap">
+      <table class="company-list" id="companyTable">
+        <thead><tr id="tableHead"></tr></thead>
+        <tbody id="companyRows"></tbody>
+        <tfoot id="medianRow"></tfoot>
+      </table>
+      <div id="emptyState" class="empty-state" hidden>По заданным условиям компании не найдены.</div>
+    </div>
+  </section>
+</main>
+<button class="compare-fab" id="compareFab" hidden>Перейти к сравнению <span id="compareCount">0</span></button>
+<div class="toast" id="toast" hidden></div>
+<div class="modal-backdrop" id="methodology" hidden><div class="modal"><button class="modal-close" data-close-modal>×</button><h2>Методология FMD</h2><p>Выборка формируется поиском и фильтрами. Диапазоны выручки и EBITDA применяются внутри выбранной валюты. Медиана рассчитывается без пропусков по текущему списку.</p><p>Мультипликаторы и показатели берутся из предоставленной базы и сохранённых котировок. Для проверки конкретного значения откройте карточку компании и нажмите на число за нужный год.</p></div></div>
+<script src="{{ url_for('static', filename='js/fmd_latest.js') }}"></script>
+</body>
+</html>
