@@ -57,7 +57,7 @@ class Config:
     # ========================================================================
     # Flask настройки
     # ========================================================================
-    FLASK_HOST = 'fmdlatest.railway.internal'
+    FLASK_HOST = '0.0.0.0'
     FLASK_PORT = 8080
     FLASK_DEBUG = True
     SECRET_KEY = 'your-secret-key-change-in-production'
