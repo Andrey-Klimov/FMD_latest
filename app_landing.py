@@ -311,4 +311,4 @@ if __name__ == '__main__':
     get_cache()
     print(f"Landing data: {len(_companies_cache)} companies")
     print("Routes: /landing , /company/<slug> , /api/landing/companies , /evidence/<slug>/<file>")
-    app.run(host='fmdlatest-production.up.railway.app', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

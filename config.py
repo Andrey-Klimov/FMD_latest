@@ -58,7 +58,7 @@ class Config:
     # Flask настройки
     # ========================================================================
     FLASK_HOST = '0.0.0.0'
-    FLASK_PORT = 8080
+    FLASK_PORT = 5000
     FLASK_DEBUG = True
     SECRET_KEY = 'your-secret-key-change-in-production'
     
